@@ -6,7 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     private string verticalMove = "Vertical";
     private string horizontalMove = "Horizontal";
-    private string changeDim = "Fire1";
+    private string changeDim = "ChangeView";
 
     public float move_vert { get; private set; }
     public float move_hori { get; private set; }
