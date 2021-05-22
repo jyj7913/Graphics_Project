@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TransParent : MonoBehaviour
 {
-    private BoxCollider collider;
+    private BoxCollider[] collider;
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<BoxCollider>();
+        collider = GetComponents<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -19,11 +19,17 @@ public class TransParent : MonoBehaviour
 
     public void SetTrue()
     {
-        collider.enabled = true;
+        for (int i = 0; i < collider.Length; i++)
+        {
+            collider[i].enabled = true;
+        }
     }
 
     public void SetFalse()
     {
-        collider.enabled = false;
+        for (int i = collider.Length - 1; i > -1; i--)
+        {
+            collider[i].enabled = false;
+        }
     }
 }

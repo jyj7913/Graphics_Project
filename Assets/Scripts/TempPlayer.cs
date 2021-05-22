@@ -1,24 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Cinemachine;
 
 public class TempPlayer : MonoBehaviour
 {
     private float m_moveSpeed = 5;
-    private float m_turnSpeed = 200;
     private float m_jumpForce = 7;
 
-    private float m_currentV = 0;
-    private float m_currentH = 0;
-
-    private readonly float m_interpolation = 10;
     private readonly float m_walkScale = 0.33f;
-    private readonly float m_backwardsWalkScale = 0.16f;
-    private readonly float m_backwardRunScale = 0.66f;
 
     private bool m_wasGrounded;
-    private Vector3 m_currentDirection = Vector3.zero;
 
     private float m_jumpTimeStamp = 0;
     private float m_minJumpInterval = 0.05f;
@@ -45,8 +38,6 @@ public class TempPlayer : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-        Debug.Log(transform.forward);
-        Debug.Log(transform.right);
         forward_ = Vector3.zero;
         right_ = new Vector3(0f, 0f, 1f);
         allowMove = true;
@@ -107,6 +98,14 @@ public class TempPlayer : MonoBehaviour
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Kill")
+        {
+            Dead();
+        }
+    }
+
     private void Update()
     {
         if (!m_jumpInput && Input.GetKey(KeyCode.Space))
@@ -142,8 +141,38 @@ public class TempPlayer : MonoBehaviour
             dist2 *= m_walkScale;
         }
         Vector3 relativePos = dist + dist2;
-        playerRigidbody.MovePosition(playerRigidbody.position + relativePos);
 
+        if (is2D) {
+            if (playerRigidbody.position.z < -3 && Input.GetKey(KeyCode.LeftArrow))
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
+            }
+            else
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position + relativePos);
+            }
+        }
+        else
+        {
+            if (playerRigidbody.position.x < -6.5 && Input.GetKey(KeyCode.LeftArrow))
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
+
+            }
+            else if ((playerRigidbody.position.x > 6.5) && Input.GetKey(KeyCode.RightArrow))
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
+
+            }
+            else if (playerRigidbody.position.z < -3 && Input.GetKey(KeyCode.DownArrow))
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
+            }
+            else
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position + relativePos);
+            }
+        }
         float directionLength = relativePos.magnitude;
         relativePos.y = 0;
         relativePos = relativePos.normalized * directionLength;
@@ -158,36 +187,6 @@ public class TempPlayer : MonoBehaviour
             }
         }
         playerAnimator.SetFloat("MoveSpeed", relativePos.magnitude);
-
-        /*float v = Input.GetAxis("Vertical");
-        float h = Input.GetAxis("Horizontal");
-
-        Transform camera = Camera.main.transform;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            v *= m_walkScale;
-            h *= m_walkScale;
-        }
-
-        m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
-        m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
-
-        Vector3 direction = camera.forward * m_currentV + camera.right * m_currentH;
-
-        float directionLength = direction.magnitude;
-        direction.y = 0;
-        direction = direction.normalized * directionLength;
-
-        if (direction != Vector3.zero)
-        {
-            m_currentDirection = Vector3.Slerp(m_currentDirection, direction, Time.deltaTime * m_interpolation);
-
-            transform.rotation = Quaternion.LookRotation(m_currentDirection);
-            transform.position += m_currentDirection * m_moveSpeed * Time.deltaTime;
-
-            playerAnimator.SetFloat("MoveSpeed", direction.magnitude);
-        }*/
 
         JumpingAndLanding();
     }
@@ -261,5 +260,10 @@ public class TempPlayer : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);        // No more fix...
         playerRigidbody.useGravity = true;
         allowMove = true;
+    }
+
+    void Dead()
+    {
+        Debug.Log("Die!");
     }
 }
