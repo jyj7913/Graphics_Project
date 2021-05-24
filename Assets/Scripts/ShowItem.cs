@@ -20,9 +20,17 @@ public class ShowItem : MonoBehaviour
         if (Input.GetKey(KeyCode.G)) {
             Target.SetActive(true);
         }
+
+        
     }
 
-  
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag.Equals("Player"))
+        {
+            Target.SetActive(true);
+        }
+    }
 
-   
+
 }
