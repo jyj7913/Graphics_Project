@@ -141,38 +141,8 @@ public class TempPlayer : MonoBehaviour
             dist2 *= m_walkScale;
         }
         Vector3 relativePos = dist + dist2;
+        playerRigidbody.MovePosition(playerRigidbody.position + relativePos);
 
-        if (is2D) {
-            if (playerRigidbody.position.z < -3 && Input.GetKey(KeyCode.LeftArrow))
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
-            }
-            else
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position + relativePos);
-            }
-        }
-        else
-        {
-            if (playerRigidbody.position.x < -6.5 && Input.GetKey(KeyCode.LeftArrow))
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
-
-            }
-            else if ((playerRigidbody.position.x > 6.5) && Input.GetKey(KeyCode.RightArrow))
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
-
-            }
-            else if (playerRigidbody.position.z < -3 && Input.GetKey(KeyCode.DownArrow))
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position - relativePos);
-            }
-            else
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position + relativePos);
-            }
-        }
         float directionLength = relativePos.magnitude;
         relativePos.y = 0;
         relativePos = relativePos.normalized * directionLength;

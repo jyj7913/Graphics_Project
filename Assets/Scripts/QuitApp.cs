@@ -11,6 +11,7 @@ public class QuitApp : MonoBehaviour
         {
             Debug.Log("quit");
             Application.Quit();
+            PlayerPrefs.SetFloat("LastPosition", 0f);
         }
     }
 }

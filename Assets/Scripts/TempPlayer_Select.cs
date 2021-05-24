@@ -35,6 +35,7 @@ public class TempPlayer_Select : MonoBehaviour
         forward_ = new Vector3(0f, 0f, 1f);
         right_ = new Vector3(1f, 0f, 0f);
         allowMove = true;
+        playerRigidbody.MovePosition(new Vector3(PlayerPrefs.GetFloat("LastPosition") * 18f, 5.2f, 0f));
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -97,6 +98,12 @@ public class TempPlayer_Select : MonoBehaviour
         if(other.tag == "SampleStage")
         {
             SceneManager.LoadScene("SampleScene");
+            PlayerPrefs.SetFloat("LastPosition", 0f);
+        }
+        if (other.tag == "Stage1")
+        {
+            SceneManager.LoadScene("SampleScene");
+            PlayerPrefs.SetFloat("LastPosition", 1f);
         }
     }
 
