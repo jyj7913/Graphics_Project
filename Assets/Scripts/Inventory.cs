@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
 
@@ -12,8 +13,9 @@ public class Inventory : MonoBehaviour {
     {
         SlotData slot = new SlotData();
         slot.isEmpty = true;
-        
-        
-        myText.GetComponent<Text>().text = "Key: " + n + "/5";
+
+
+        keyNum = GetComponent<Text>();
+        keyNum.text = "Key: " + n + "/5";
     }
 }
