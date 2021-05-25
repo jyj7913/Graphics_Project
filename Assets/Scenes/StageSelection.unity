@@ -548,7 +548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a46403905de7114ba78b8e7ff6dc8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WallFor2: {fileID: 1715780674}
 --- !u!1 &586960201 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 134424, guid: ee584e076453ba048b7ecaa9d9ec3a30, type: 3}

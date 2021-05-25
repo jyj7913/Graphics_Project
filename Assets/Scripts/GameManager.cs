@@ -6,25 +6,26 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject WallFor2;
+    private GameObject WallFor2;
+    private GameObject WallFor3;
     private bool open2 = false;
     private bool open3 = false;
     // Start is called before the first frame update
     private void Awake()
     {
-        if(instance == null)
+        WallFor2 = GameObject.Find("WallFor2");
+        WallFor3 = GameObject.Find("WallFor3");
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            DontDestroyOnLoad(WallFor2);
+            DontDestroyOnLoad(WallFor3);
         }
     }
     void Start()
     {
-        PlayerPrefs.SetInt("Stage", 0);
+        
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
             {
                 if (PlayerPrefs.GetInt("Stage") >= 1)
                 {
+                    Debug.Log("Open!");
                     open2 = true;
                     WallFor2.SetActive(false);
                 }
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
                 if (PlayerPrefs.GetInt("Stage") >= 2)
                 {
                     open3 = true;
-
+                    WallFor3.SetActive(false);
                 }
             }
         }

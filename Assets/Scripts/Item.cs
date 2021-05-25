@@ -21,10 +21,6 @@ public class Item : MonoBehaviour
     void Update()
     {
         if (isPickUp && Input.GetKeyDown(KeyCode.E)) PickUp();
-        if(gameObject.name == "key_1")
-        {
-           // Debug.Log(gameObject.transform.position);
-        }
     }
 
     void OnTriggerEnter(Collider col)

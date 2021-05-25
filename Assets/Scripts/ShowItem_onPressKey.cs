@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShowItem_onPressKey : MonoBehaviour
 {
-
+    private bool pressed = false;
     public Item Target;
 
     // Start is called before the first frame update
@@ -17,8 +17,9 @@ public class ShowItem_onPressKey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.G)) {
+        if (Input.GetKey(KeyCode.G) && !pressed) {
             Target.setActive(true);
+            pressed = true;
         }
     }
 
