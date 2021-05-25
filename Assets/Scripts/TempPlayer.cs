@@ -250,5 +250,7 @@ public class TempPlayer : MonoBehaviour
     void Dead()
     {
         Debug.Log("Die!");
+        SceneManager.LoadScene("Stage1");
+
     }
 }
