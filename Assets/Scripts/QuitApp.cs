@@ -9,7 +9,6 @@ public class QuitApp : MonoBehaviour
     {
         if (Input.GetButton("Quit"))
         {
-            Debug.Log("quit");
             Application.Quit();
             PlayerPrefs.SetFloat("LastPosition", 0f);
         }

@@ -104,6 +104,11 @@ public class TempPlayer : MonoBehaviour
         {
             Dead();
         }
+
+        if (other.tag == "Home")
+        {
+            SceneManager.LoadScene("StageSelection");
+        }
     }
 
     private void Update()

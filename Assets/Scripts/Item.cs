@@ -8,11 +8,13 @@ public class Item : MonoBehaviour
 
     bool isPickUp;
     private Behaviour halo;
+    private Inventory inven;
     // Start is called before the first frame update
     void Start()
     {
         halo = (Behaviour)GetComponent("Halo");
         halo.enabled = false;
+        inven = FindObjectOfType<Inventory>();
     }
 
     // Update is called once per frame
@@ -44,7 +46,13 @@ public class Item : MonoBehaviour
     void PickUp()
     {
         Destroy(gameObject);
+
+        inven.ItemGet();
     }
 
-
+    public void setActive(bool active)
+    {
+        gameObject.SetActive(active);
+        Debug.Log(gameObject.name +" : " + gameObject.transform.position);
+    }
 }

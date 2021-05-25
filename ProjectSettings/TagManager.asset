@@ -9,6 +9,7 @@ TagManager:
   - SampleStage
   - Kill
   - Stage2
+  - Home
   layers:
   - Default
   - TransparentFX
