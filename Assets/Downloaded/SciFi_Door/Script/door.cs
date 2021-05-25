@@ -12,6 +12,9 @@ public class door : MonoBehaviour {
 	}
 
 	void OnTriggerExit ( Collider obj  ){
-		thedoor.GetComponent<Animation>().Play("close");
+		if (obj.tag == "Player")
+		{
+			thedoor.GetComponent<Animation>().Play("close");
+		}
 	}
 }

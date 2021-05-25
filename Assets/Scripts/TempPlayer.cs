@@ -109,6 +109,16 @@ public class TempPlayer : MonoBehaviour
         {
             SceneManager.LoadScene("StageSelection");
         }
+        if (other.tag == "Stage1")
+        {
+            GameManager.instance.Stage1Clear();
+            SceneManager.LoadScene("StageSelection");
+        }
+        if (other.tag == "Stage2")
+        {
+            GameManager.instance.Stage2Clear();
+            SceneManager.LoadScene("StageSelection");
+        }
     }
 
     private void Update()

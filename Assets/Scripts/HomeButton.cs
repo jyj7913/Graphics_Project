@@ -22,4 +22,11 @@ public class HomeButton : MonoBehaviour
     {
         SceneManager.LoadScene("StageSelection");
     }
+
+    public void OnClickRestart()
+    {
+        PlayerPrefs.SetInt("LastPosition", 0);
+        PlayerPrefs.SetInt("Stage", 0);
+        SceneManager.LoadScene("StageSelection");
+    }
 }

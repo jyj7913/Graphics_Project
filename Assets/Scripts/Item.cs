@@ -20,8 +20,11 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (isPickUp && Input.GetKeyDown(KeyCode.P)) PickUp();
+        if (isPickUp && Input.GetKeyDown(KeyCode.E)) PickUp();
+        if(gameObject.name == "key_1")
+        {
+            Debug.Log(gameObject.transform.position);
+        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -53,6 +56,5 @@ public class Item : MonoBehaviour
     public void setActive(bool active)
     {
         gameObject.SetActive(active);
-        Debug.Log(gameObject.name +" : " + gameObject.transform.position);
     }
 }
