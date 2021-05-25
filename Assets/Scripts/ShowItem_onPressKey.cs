@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowItem : MonoBehaviour
+public class ShowItem_onPressKey : MonoBehaviour
 {
 
     public Item Target;
@@ -22,13 +22,7 @@ public class ShowItem : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.tag.Equals("Player"))
-        {
-            Target.setActive(true);
-        }
-    }
+   
 
 
 }

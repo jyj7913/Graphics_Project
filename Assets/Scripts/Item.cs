@@ -23,7 +23,7 @@ public class Item : MonoBehaviour
         if (isPickUp && Input.GetKeyDown(KeyCode.E)) PickUp();
         if(gameObject.name == "key_1")
         {
-            Debug.Log(gameObject.transform.position);
+           // Debug.Log(gameObject.transform.position);
         }
     }
 
