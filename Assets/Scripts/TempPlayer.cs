@@ -104,7 +104,14 @@ public class TempPlayer : MonoBehaviour
         {
             Dead();
         }
-
+        if (other.tag == "ToMaze") {
+            PlayerPrefs.SetInt("keys", 2);
+            SceneManager.LoadScene("StageMaze");
+        }
+        if (other.tag == "Maze") {
+            
+            SceneManager.LoadScene("Stage2_1");
+        }
         if (other.tag == "Home")
         {
             SceneManager.LoadScene("StageSelection");
@@ -250,7 +257,12 @@ public class TempPlayer : MonoBehaviour
     void Dead()
     {
         Debug.Log("Die!");
-        SceneManager.LoadScene("Stage1");
+        if (SceneManager.GetActiveScene().name == "Stage1")
+            SceneManager.LoadScene("Stage1");
+        else if (SceneManager.GetActiveScene().name == "Stage2" || SceneManager.GetActiveScene().name == "Stage2_1")
+            SceneManager.LoadScene("Stage2");
+        else if (SceneManager.GetActiveScene().name == "Stage3")
+            SceneManager.LoadScene("Stage3");
 
     }
 }

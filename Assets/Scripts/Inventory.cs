@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
@@ -18,13 +20,22 @@ public class Inventory : MonoBehaviour {
         baseCollider.enabled = false;
 
         keyNum = GetComponent<Text>();
-        keyNum.text = "Key: " + n + "/ " + goal;
+        if (SceneManager.GetActiveScene().name == "StageMaze") {
+            keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
+        }
+        else
+            keyNum.text = "Key: " + n + "/ " + goal;
     }
 
     public void ItemGet()
     {
         n++;
-        keyNum.text = "Key: " + n + "/ " + goal;
+        if (SceneManager.GetActiveScene().name == "StageMaze")
+        {
+            keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
+        }
+        else
+            keyNum.text = "Key: " + n + "/ " + goal;
 
         if (n == goal)
         {
