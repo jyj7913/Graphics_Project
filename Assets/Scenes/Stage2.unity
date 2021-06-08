@@ -193,8 +193,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.2
-  m_fontSizeBase: 12.2
+  m_fontSize: 9.68
+  m_fontSizeBase: 9.68
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -295,7 +295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -89.986, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.21277, y: 20.2}
+  m_AnchoredPosition: {x: -4.21277, y: 18.15}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &172368542
@@ -1190,11 +1190,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 080598df375892b40999ed3d070765c7, type: 3}
---- !u!135 &495899079 stripped
-SphereCollider:
-  m_CorrespondingSourceObject: {fileID: 13500000, guid: cfef738579cd02c40b3b1d63e67b0f84, type: 3}
-  m_PrefabInstance: {fileID: 2013542013}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &530499275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2380,6 +2375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 080598df375892b40999ed3d070765c7, type: 3}
+--- !u!135 &1322865344 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 13582488, guid: 6414ea9cfa2ccc24a95c775ffa926968, type: 3}
+  m_PrefabInstance: {fileID: 1145333854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1373374664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: cfef738579cd02c40b3b1d63e67b0f84, type: 3}
@@ -2738,7 +2738,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Key: 0 / 3'
+  m_Text: 'Key: 0 / 5'
 --- !u!222 &1602503041
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2760,8 +2760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots: []
-  goal: 3
-  baseCollider: {fileID: 495899079}
+  goal: 2
+  baseCollider: {fileID: 1322865344}
 --- !u!1 &1681753484 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1685936906211394, guid: 080598df375892b40999ed3d070765c7, type: 3}
@@ -3535,15 +3535,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160717884373574335, guid: b35b42e603bb1044fbff478acf370d30, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00892972
+      value: -0.008929716
       objectReference: {fileID: 0}
     - target: {fileID: 4160717884373574335, guid: b35b42e603bb1044fbff478acf370d30, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000003934497
+      value: -0.000000005981953
       objectReference: {fileID: 0}
     - target: {fileID: 4160717884373574335, guid: b35b42e603bb1044fbff478acf370d30, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.5135363e-11
+      value: -5.3419283e-11
       objectReference: {fileID: 0}
     - target: {fileID: 4160717884606113798, guid: b35b42e603bb1044fbff478acf370d30, type: 3}
       propertyPath: m_LocalPosition.x

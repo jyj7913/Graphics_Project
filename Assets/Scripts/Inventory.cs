@@ -23,6 +23,10 @@ public class Inventory : MonoBehaviour {
         if (SceneManager.GetActiveScene().name == "StageMaze") {
             keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
         }
+        if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            keyNum.text = "Key: " + n + "/ " + (goal + 3);
+        }
         else
             keyNum.text = "Key: " + n + "/ " + goal;
     }
@@ -33,6 +37,10 @@ public class Inventory : MonoBehaviour {
         if (SceneManager.GetActiveScene().name == "StageMaze")
         {
             keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
+        }
+        if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            keyNum.text = "Key: " + n + "/ " + (goal + 3);
         }
         else
             keyNum.text = "Key: " + n + "/ " + goal;

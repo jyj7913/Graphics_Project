@@ -36,11 +36,11 @@ public class MazeSpawner : MonoBehaviour {
 		}
 		int cnt = 0;
 		System.Random seed = new System.Random();
-		int a = (int)seed.Next(Rows);
-		int b = (int)seed.Next(Rows);
-		while (a == b) b = (int)seed.Next(Rows);
-		int c = (int)seed.Next(Rows);
-		while (a == c || b == c) c = (int)seed.Next(Rows);
+		int a = (int)seed.Next(8);
+		int b = (int)seed.Next(8);
+		while (a == b) b = (int)seed.Next(8);
+		int c = (int)seed.Next(8);
+		while (a == c || b == c) c = (int)seed.Next(8);
 
 		switch (Algorithm) {
 		case MazeGenerationAlgorithm.PureRecursive:

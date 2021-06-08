@@ -110,7 +110,7 @@ public class TempPlayer : MonoBehaviour
         }
         if (other.tag == "Maze") {
             
-            SceneManager.LoadScene("Stage2_1");
+            SceneManager.LoadScene("Stage2Final");
         }
         if (other.tag == "Home")
         {
@@ -259,7 +259,7 @@ public class TempPlayer : MonoBehaviour
         Debug.Log("Die!");
         if (SceneManager.GetActiveScene().name == "Stage1")
             SceneManager.LoadScene("Stage1");
-        else if (SceneManager.GetActiveScene().name == "Stage2" || SceneManager.GetActiveScene().name == "Stage2_1")
+        else if (SceneManager.GetActiveScene().name == "Stage2" || SceneManager.GetActiveScene().name == "Stage2Final")
             SceneManager.LoadScene("Stage2");
         else if (SceneManager.GetActiveScene().name == "Stage3")
             SceneManager.LoadScene("Stage3");
