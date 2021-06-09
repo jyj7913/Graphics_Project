@@ -10,6 +10,7 @@ public class TempPlayer : MonoBehaviour
     private float m_jumpForce = 7;
 
     private readonly float m_walkScale = 0.33f;
+    private readonly float m_sprintScale = 2f;
 
     private bool m_wasGrounded;
 
@@ -161,6 +162,10 @@ public class TempPlayer : MonoBehaviour
         {
             dist *= m_walkScale;
             dist2 *= m_walkScale;
+        }
+        if (Input.GetKey(KeyCode.LeftControl)) {
+            dist *= m_sprintScale;
+            dist2 *= m_sprintScale;
         }
         Vector3 relativePos = dist + dist2;
         playerRigidbody.MovePosition(playerRigidbody.position + relativePos);

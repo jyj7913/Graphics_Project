@@ -18,12 +18,12 @@ public class Inventory : MonoBehaviour {
         SlotData slot = new SlotData();
         slot.isEmpty = true;
         baseCollider.enabled = false;
-
+        Debug.Log(SceneManager.GetActiveScene().name);
         keyNum = GetComponent<Text>();
         if (SceneManager.GetActiveScene().name == "StageMaze") {
             keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
         }
-        if (SceneManager.GetActiveScene().name == "Stage2")
+        else if (SceneManager.GetActiveScene().name == "Stage2")
         {
             keyNum.text = "Key: " + n + "/ " + (goal + 3);
         }
@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour {
         {
             keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
         }
-        if (SceneManager.GetActiveScene().name == "Stage2")
+        else if (SceneManager.GetActiveScene().name == "Stage2")
         {
             keyNum.text = "Key: " + n + "/ " + (goal + 3);
         }
