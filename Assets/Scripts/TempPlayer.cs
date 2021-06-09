@@ -214,6 +214,8 @@ public class TempPlayer : MonoBehaviour
         if (Input.GetButtonDown("ChangeView"))
         {
             TransParent[] transParents = FindObjectsOfType<TransParent>();
+            TransParent2[] transParents2 = FindObjectsOfType<TransParent2>();
+            Blocking[] blockings = FindObjectsOfType<Blocking>();
             is2D = !is2D;
             if (is2D)
             {
@@ -226,6 +228,14 @@ public class TempPlayer : MonoBehaviour
                 {
                     transParents[i].SetTrue();
                 }
+                for (int i = 0; i < transParents2.Length; i++)
+                {
+                    transParents2[i].SetFalse();
+                }
+                for (int j = 0; j<blockings.Length; j++)
+                {
+                    blockings[j].LongCollider();
+                }
             }
             else
             {
@@ -237,6 +247,14 @@ public class TempPlayer : MonoBehaviour
                 for (int i = 0; i < transParents.Length; i++)
                 {
                     transParents[i].SetFalse();
+                }
+                for (int i = 0; i < transParents2.Length; i++)
+                {
+                    transParents2[i].SetTrue();
+                }
+                for (int j = 0; j < blockings.Length; j++)
+                {
+                    blockings[j].ShortCollider();
                 }
             }
             StartCoroutine(waitChange());               // Delay        
