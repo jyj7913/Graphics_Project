@@ -4,7 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(MeshFilter))]
 public class ReverseNormal : MonoBehaviour
 {
-
 	void Start()
 	{
 		MeshFilter filter = GetComponent(typeof(MeshFilter)) as MeshFilter;

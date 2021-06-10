@@ -108,7 +108,12 @@ public class TempPlayer_Select : MonoBehaviour
         }
         if (other.tag == "Stage2") {
             SceneManager.LoadScene("Stage2");
-            PlayerPrefs.SetFloat("LastPosition", 1f);
+            PlayerPrefs.SetFloat("LastPosition", 2f);
+        }
+        if (other.tag == "Stage3")
+        {
+            SceneManager.LoadScene("Stage3");
+            PlayerPrefs.SetFloat("LastPosition", 3f);
         }
     }
 

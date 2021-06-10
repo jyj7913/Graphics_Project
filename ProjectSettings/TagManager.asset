@@ -20,6 +20,9 @@ TagManager:
   - JumpUp4
   - JumpUp5
   - JumpUp6
+  - Stage3
+  - Fire
+  - particle
   layers:
   - Default
   - TransparentFX

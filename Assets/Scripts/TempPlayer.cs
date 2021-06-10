@@ -127,6 +127,11 @@ public class TempPlayer : MonoBehaviour
             GameManager.instance.Stage2Clear();
             SceneManager.LoadScene("StageSelection");
         }
+        if (other.tag == "Stage3")
+        {
+            GameManager.instance.Stage3Clear();
+            SceneManager.LoadScene("StageSelection");
+        }
         if (other.tag == "JumpUp")
         {
             playerRigidbody.velocity = Vector2.zero;

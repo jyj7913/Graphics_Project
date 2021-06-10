@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour {
         if (SceneManager.GetActiveScene().name == "StageMaze") {
             keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
         }
-        else if (SceneManager.GetActiveScene().name == "Stage2")
+        else if (SceneManager.GetActiveScene().name == "Stage3")
         {
             keyNum.text = "Key: " + n + "/ " + (goal + 3);
         }
@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour {
         {
             keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";
         }
-        else if (SceneManager.GetActiveScene().name == "Stage2")
+        else if (SceneManager.GetActiveScene().name == "Stage3")
         {
             keyNum.text = "Key: " + n + "/ " + (goal + 3);
         }
