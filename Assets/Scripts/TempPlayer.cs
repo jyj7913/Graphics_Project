@@ -127,6 +127,41 @@ public class TempPlayer : MonoBehaviour
             GameManager.instance.Stage2Clear();
             SceneManager.LoadScene("StageSelection");
         }
+        if (other.tag == "JumpUp")
+        {
+            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 4, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.forward * m_jumpForce, ForceMode.Impulse);
+        }
+        if (other.tag == "JumpUp2")
+        {
+            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.left * m_jumpForce, ForceMode.Impulse);
+        }
+        if (other.tag == "JumpUp3")
+        {
+            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 5, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.back * m_jumpForce * 2.7f, ForceMode.Impulse);
+        }
+        if (other.tag == "JumpUp4")
+        {
+            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 5, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.forward * m_jumpForce * 2.7f, ForceMode.Impulse);
+        }
+        if (other.tag == "JumpUp5")
+        {
+            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 3.4f, ForceMode.Impulse);
+        }
+        if (other.tag == "JumpUp6")
+        {
+            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 5, ForceMode.Impulse);
+            playerRigidbody.AddForce(Vector3.back * m_jumpForce * 8, ForceMode.Impulse);
+        }
     }
 
     private void Update()
@@ -195,6 +230,7 @@ public class TempPlayer : MonoBehaviour
         if (jumpCooldownOver && m_isGrounded && m_jumpInput)
         {
             m_jumpTimeStamp = Time.time;
+            playerRigidbody.velocity = Vector2.zero;
             playerRigidbody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
         }
 
@@ -216,6 +252,7 @@ public class TempPlayer : MonoBehaviour
             TransParent[] transParents = FindObjectsOfType<TransParent>();
             TransParent2[] transParents2 = FindObjectsOfType<TransParent2>();
             Blocking[] blockings = FindObjectsOfType<Blocking>();
+            TransparentObj[] TransparentObjs = FindObjectsOfType<TransparentObj>();
             is2D = !is2D;
             if (is2D)
             {
@@ -236,6 +273,10 @@ public class TempPlayer : MonoBehaviour
                 {
                     blockings[j].LongCollider();
                 }
+                for (int j = 0; j < TransparentObjs.Length; j++)
+                {
+                    TransparentObjs[j].SetTrue();
+                }
             }
             else
             {
@@ -255,6 +296,10 @@ public class TempPlayer : MonoBehaviour
                 for (int j = 0; j < blockings.Length; j++)
                 {
                     blockings[j].ShortCollider();
+                }
+                for (int j = 0; j < TransparentObjs.Length; j++)
+                {
+                    TransparentObjs[j].SetFalse();
                 }
             }
             StartCoroutine(waitChange());               // Delay        

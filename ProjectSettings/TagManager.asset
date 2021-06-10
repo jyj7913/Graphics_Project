@@ -14,6 +14,12 @@ TagManager:
   - Floor
   - Maze
   - ToMaze
+  - JumpUp
+  - JumpUp2
+  - JumpUp3
+  - JumpUp4
+  - JumpUp5
+  - JumpUp6
   layers:
   - Default
   - TransparentFX
