@@ -14,12 +14,6 @@ public class Blocking : MonoBehaviour
         collider.size = new Vector3(collider.size.x * 30, collider.size.y, collider.size.z);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void LongCollider()
     {
         originalLength = collider.size.x;

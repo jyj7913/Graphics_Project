@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
 
-    public List<SlotData> slots = new List<SlotData>();
     private Text keyNum;
     private int n = 0;
     public int goal;
@@ -15,10 +14,7 @@ public class Inventory : MonoBehaviour {
 
     private void Start()
     {
-        SlotData slot = new SlotData();
-        slot.isEmpty = true;
         baseCollider.enabled = false;
-        Debug.Log(SceneManager.GetActiveScene().name);
         keyNum = GetComponent<Text>();
         if (SceneManager.GetActiveScene().name == "StageMaze") {
             keyNum.text = "Key: " + (n + PlayerPrefs.GetInt("keys")) + "/ 5";

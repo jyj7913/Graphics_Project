@@ -11,11 +11,6 @@ public class PlayerInput : MonoBehaviour
     public float move_vert { get; private set; }
     public float move_hori { get; private set; }
     public bool changeView { get; private set; }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

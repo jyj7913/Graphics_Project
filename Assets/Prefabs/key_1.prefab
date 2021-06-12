@@ -10,10 +10,22 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.6288027
-  m_Height: 6.2484326
+  m_Radius: 3
+  m_Height: 10
   m_Direction: 1
   m_Center: {x: 0.35846233, y: 3.1610253, z: 0.43998548}
+--- !u!122 &6052481065333316024
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052481065001893131}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_Size: 2.5
 --- !u!111 &6052481065333316031
 Animation:
   m_ObjectHideFlags: 0
@@ -30,18 +42,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!122 &6052481065333316024
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6052481065001893131}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4286611584
-  m_Size: 2
 --- !u!114 &6052481065333316030
 MonoBehaviour:
   m_ObjectHideFlags: 0

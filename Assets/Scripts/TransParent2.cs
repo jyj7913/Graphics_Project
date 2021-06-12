@@ -10,13 +10,6 @@ public class TransParent2 : MonoBehaviour
     {
         collider = GetComponents<BoxCollider>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SetTrue()
     {
         for (int i = 0; i < collider.Length; i++)
