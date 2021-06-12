@@ -1,6 +1,6 @@
 # Graphics Project
 ## A Puzzle Game Between 2D and 3D
-### asdsd
+### Graphic_Project
 Project Directory
 ### 2.5DimDemo.mp4
 Demonstration Video
