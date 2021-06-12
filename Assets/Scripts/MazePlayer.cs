@@ -30,30 +30,16 @@ public class MazePlayer : MonoBehaviour
     private Vector3 forward_;
     private Vector3 right_;
     private bool allowMove;
+    private Vector3 temp = new Vector3(0f, 0f, 1f);
 
-    public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
-    public RotationAxes axes = RotationAxes.MouseXAndY;
-    public float sensitivityX = 15F;
-    public float sensitivityY = 15F;
+    private float rotateSpeedX = 15F;
+    private float minRotateX = -360F;
+    private float maxRotateX = 360F;
+    private Quaternion xQuaternion;
 
-    public float minimumX = -360F;
-    public float maximumX = 360F;
+    private float rotationX = 0F;
 
-    public float minimumY = -60F;
-    public float maximumY = 60F;
-
-    float rotationX = 0F;
-    float rotationY = 0F;
-
-    private List<float> rotArrayX = new List<float>();
-    float rotAverageX = 0F;
-
-    private List<float> rotArrayY = new List<float>();
-    float rotAverageY = 0F;
-
-    public float frameCounter = 20;
-
-    Quaternion originalRotation;
+    private float rotAverageX = 0F;
 
     private List<Collider> m_collisions = new List<Collider>();
 
@@ -66,8 +52,6 @@ public class MazePlayer : MonoBehaviour
         forward_ = new Vector3(0f, 0f, 1f);
         right_ = new Vector3(1f, 0f, 0f);
         allowMove = true;
-
-        originalRotation = transform.localRotation;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -131,69 +115,13 @@ public class MazePlayer : MonoBehaviour
         {
             Dead();
         }
-        if (other.tag == "ToMaze")
-        {
-            PlayerPrefs.SetInt("keys", 2);
-            SceneManager.LoadScene("StageMaze");
-        }
         if (other.tag == "Maze")
         {
-
             SceneManager.LoadScene("Stage2Final");
         }
         if (other.tag == "Home")
         {
             SceneManager.LoadScene("StageSelection");
-        }
-        if (other.tag == "Stage1")
-        {
-            GameManager.instance.Stage1Clear();
-            SceneManager.LoadScene("StageSelection");
-        }
-        if (other.tag == "Stage2")
-        {
-            GameManager.instance.Stage2Clear();
-            SceneManager.LoadScene("StageSelection");
-        }
-        if (other.tag == "Stage3")
-        {
-            GameManager.instance.Stage3Clear();
-            SceneManager.LoadScene("StageSelection");
-        }
-        if (other.tag == "JumpUp")
-        {
-            playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 4, ForceMode.Impulse);
-            playerRigidbody.AddForce(Vector3.forward * m_jumpForce, ForceMode.Impulse);
-        }
-        if (other.tag == "JumpUp2")
-        {
-            playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-            playerRigidbody.AddForce(Vector3.left * m_jumpForce, ForceMode.Impulse);
-        }
-        if (other.tag == "JumpUp3")
-        {
-            playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 5, ForceMode.Impulse);
-            playerRigidbody.AddForce(Vector3.back * m_jumpForce * 2.7f, ForceMode.Impulse);
-        }
-        if (other.tag == "JumpUp4")
-        {
-            playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 5, ForceMode.Impulse);
-            playerRigidbody.AddForce(Vector3.forward * m_jumpForce * 2.7f, ForceMode.Impulse);
-        }
-        if (other.tag == "JumpUp5")
-        {
-            playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 3.4f, ForceMode.Impulse);
-        }
-        if (other.tag == "JumpUp6")
-        {
-            playerRigidbody.velocity = Vector2.zero;
-            playerRigidbody.AddForce(Vector3.up * m_jumpForce * 5, ForceMode.Impulse);
-            playerRigidbody.AddForce(Vector3.back * m_jumpForce * 8, ForceMode.Impulse);
         }
     }
 
@@ -223,7 +151,6 @@ public class MazePlayer : MonoBehaviour
 
     private void DirectUpdate()
     {
-
         Vector3 dist = playerInput.move_hori * right_ * Time.deltaTime * m_moveSpeed;
         Vector3 dist2 = playerInput.move_vert * forward_ * Time.deltaTime * m_moveSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -243,108 +170,34 @@ public class MazePlayer : MonoBehaviour
         relativePos.y = 0;
         relativePos = relativePos.normalized * directionLength;
 
-        if (relativePos != Vector3.zero)                                                    // Rotate Facing
+        if (is2D)
         {
-            Vector3 targetDirection = relativePos.normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-            while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
+            if (relativePos != Vector3.zero)                                                    // Rotate Facing
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime);
+                Vector3 targetDirection = relativePos.normalized;
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
+                {
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime);
+                }
             }
         }
+        else
+        {
+            rotAverageX = 0f;
+
+            rotationX += Input.GetAxis("Mouse X") * rotateSpeedX;
+            rotAverageX = ClampAngle(rotationX, minRotateX, maxRotateX);
+
+            xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
+
+            transform.rotation = xQuaternion;
+            forward_ = xQuaternion * temp;
+            right_ = new Vector3(forward_.z, 0f, -forward_.x);
+        }
+
         playerAnimator.SetFloat("MoveSpeed", relativePos.magnitude);
-
         JumpingAndLanding();
-
-        if (!is2D)
-        {
-            if (axes == RotationAxes.MouseXAndY)
-            {
-                rotAverageY = 0f;
-                rotAverageX = 0f;
-
-                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-                rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-
-                rotArrayY.Add(rotationY);
-                rotArrayX.Add(rotationX);
-
-                if (rotArrayY.Count >= frameCounter)
-                {
-                    rotArrayY.RemoveAt(0);
-                }
-                if (rotArrayX.Count >= frameCounter)
-                {
-                    rotArrayX.RemoveAt(0);
-                }
-
-                for (int j = 0; j < rotArrayY.Count; j++)
-                {
-                    rotAverageY += rotArrayY[j];
-                }
-                for (int i = 0; i < rotArrayX.Count; i++)
-                {
-                    rotAverageX += rotArrayX[i];
-                }
-
-                rotAverageY /= rotArrayY.Count;
-                rotAverageX /= rotArrayX.Count;
-
-                rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
-                rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
-
-                Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-                Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
-                player3d_cam.LookAt.localRotation = originalRotation * xQuaternion * yQuaternion;
-            }
-            else if (axes == RotationAxes.MouseX)
-            {
-                rotAverageX = 0f;
-
-                rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-
-                rotArrayX.Add(rotationX);
-
-                if (rotArrayX.Count >= frameCounter)
-                {
-                    rotArrayX.RemoveAt(0);
-                }
-                for (int i = 0; i < rotArrayX.Count; i++)
-                {
-                    rotAverageX += rotArrayX[i];
-                }
-                rotAverageX /= rotArrayX.Count;
-
-                rotAverageX = ClampAngle(rotAverageX, minimumX, maximumX);
-
-                Quaternion xQuaternion = Quaternion.AngleAxis(rotAverageX, Vector3.up);
-                player3d_cam.LookAt.localRotation = originalRotation * xQuaternion;
-            }
-            else
-            {
-                rotAverageY = 0f;
-
-                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-
-                rotArrayY.Add(rotationY);
-
-                if (rotArrayY.Count >= frameCounter)
-                {
-                    rotArrayY.RemoveAt(0);
-                }
-                for (int j = 0; j < rotArrayY.Count; j++)
-                {
-                    rotAverageY += rotArrayY[j];
-                }
-                rotAverageY /= rotArrayY.Count;
-
-                rotAverageY = ClampAngle(rotAverageY, minimumY, maximumY);
-
-                Quaternion yQuaternion = Quaternion.AngleAxis(rotAverageY, Vector3.left);
-                player3d_cam.LookAt.localRotation = originalRotation * yQuaternion;
-            }
-            Debug.Log(player3d_cam.LookAt.rotation.eulerAngles.normalized);
-        }
     }
 
     private void JumpingAndLanding()
@@ -373,54 +226,18 @@ public class MazePlayer : MonoBehaviour
     {
         if (Input.GetButtonDown("ChangeView"))
         {
-            TransParent[] transParents = FindObjectsOfType<TransParent>();
-            TransParent2[] transParents2 = FindObjectsOfType<TransParent2>();
-            Blocking[] blockings = FindObjectsOfType<Blocking>();
-            TransparentObj[] TransparentObjs = FindObjectsOfType<TransparentObj>();
             is2D = !is2D;
             if (is2D)
             {
                 player2d_cam.Priority = 10;             // switch camera
-                player3d_cam.Priority = 5;
-                playerRigidbody.MovePosition(new Vector3(7, playerRigidbody.position.y, playerRigidbody.position.z));   // x to zero
-                for (int i = 0; i < transParents.Length; i++)
-                {
-                    transParents[i].SetTrue();
-                }
-                for (int i = 0; i < transParents2.Length; i++)
-                {
-                    transParents2[i].SetFalse();
-                }
-                for (int j = 0; j < blockings.Length; j++)
-                {
-                    blockings[j].LongCollider();
-                }
-                for (int j = 0; j < TransparentObjs.Length; j++)
-                {
-                    TransparentObjs[j].SetTrue();
-                }
+                player3d_cam.Priority = 5;   // x to zero
+                forward_ = new Vector3(0f, 0f, 1f);
+                right_ = new Vector3(1f, 0f, 0f);
             }
             else
             {
                 player2d_cam.Priority = 5;
                 player3d_cam.Priority = 10;
-                playerRigidbody.MovePosition(new Vector3(0, playerRigidbody.position.y, playerRigidbody.position.z));
-                for (int i = 0; i < transParents.Length; i++)
-                {
-                    transParents[i].SetFalse();
-                }
-                for (int i = 0; i < transParents2.Length; i++)
-                {
-                    transParents2[i].SetTrue();
-                }
-                for (int j = 0; j < blockings.Length; j++)
-                {
-                    blockings[j].ShortCollider();
-                }
-                for (int j = 0; j < TransparentObjs.Length; j++)
-                {
-                    TransparentObjs[j].SetFalse();
-                }
             }
             StartCoroutine(waitChange());               // Delay        
         }
@@ -447,13 +264,12 @@ public class MazePlayer : MonoBehaviour
         Debug.Log("Die!");
         if (SceneManager.GetActiveScene().name == "Stage1")
             SceneManager.LoadScene("Stage1");
-        else if (SceneManager.GetActiveScene().name == "Stage2" || SceneManager.GetActiveScene().name == "Stage2Final")
-            SceneManager.LoadScene("Stage2");
-        else if (SceneManager.GetActiveScene().name == "Stage3")
+        else if (SceneManager.GetActiveScene().name == "Stage3" || SceneManager.GetActiveScene().name == "Stage2Final")
             SceneManager.LoadScene("Stage3");
+        else if (SceneManager.GetActiveScene().name == "Stage2")
+            SceneManager.LoadScene("Stage2");
 
     }
-
     public static float ClampAngle(float angle, float min, float max)
     {
         angle = angle % 360;
