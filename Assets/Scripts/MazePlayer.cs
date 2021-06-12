@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
 
-public class MazePlayer : MonoBehaviour
+public class MazePlayer : MonoBehaviour                                         // Similar with TempPlayer.cs except FPS
 {
     private float m_moveSpeed = 5;
     private float m_jumpForce = 7;
@@ -184,7 +184,7 @@ public class MazePlayer : MonoBehaviour
         }
         else
         {
-            rotAverageX = 0f;
+            rotAverageX = 0f;                                                                   // Detect mouse movement for FPS moving
 
             rotationX += Input.GetAxis("Mouse X") * rotateSpeedX;
             rotAverageX = ClampAngle(rotationX, minRotateX, maxRotateX);
@@ -270,7 +270,7 @@ public class MazePlayer : MonoBehaviour
             SceneManager.LoadScene("Stage2");
 
     }
-    public static float ClampAngle(float angle, float min, float max)
+    public static float ClampAngle(float angle, float min, float max)           // Return proper angles between minimum, maximum angle
     {
         angle = angle % 360;
         if ((angle >= -360F) && (angle <= 360F))

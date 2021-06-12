@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(MeshFilter))]
 public class ReverseNormal : MonoBehaviour
 {
-	void Start()
+	void Start()																			// Reverse Normal vectors to make sphere background
 	{
 		MeshFilter filter = GetComponent(typeof(MeshFilter)) as MeshFilter;
 		if (filter != null)

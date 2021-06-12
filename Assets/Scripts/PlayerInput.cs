@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
     public bool changeView { get; private set; }
 
     // Update is called once per frame
-    void Update()
+    void Update()                                               // Update Player inputs then Player can use them
     {
         move_vert = Input.GetAxis(verticalMove);
         move_hori = Input.GetAxis(horizontalMove);

@@ -10,7 +10,7 @@ public class QuitApp : MonoBehaviour
         if (Input.GetButton("Quit"))
         {
             Application.Quit();
-            PlayerPrefs.SetFloat("LastPosition", 0f);
+            PlayerPrefs.SetFloat("LastPosition", 0f);               // If press 0, set player's position at 'Stage Select Scene' to original position
         }
     }
 }

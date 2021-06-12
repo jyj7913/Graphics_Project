@@ -35,7 +35,7 @@ public class TempPlayer : MonoBehaviour
 
     void Start()
     {
-        is2D = true;
+        is2D = true;                                            // Initialize
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
@@ -60,7 +60,7 @@ public class TempPlayer : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionStay(Collision collision)                   // Check isGround
     {
         ContactPoint[] contactPoints = collision.contacts;
         bool validSurfaceNormal = false;
@@ -99,7 +99,7 @@ public class TempPlayer : MonoBehaviour
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)                 // Trigger Tag Detector
     {
         if (other.tag == "Kill")
         {
@@ -132,7 +132,7 @@ public class TempPlayer : MonoBehaviour
             GameManager.instance.Stage3Clear();
             SceneManager.LoadScene("StageSelection");
         }
-        if (other.tag == "JumpUp")
+        if (other.tag == "JumpUp")                                                                      // Trempoline
         {
             playerRigidbody.velocity = Vector2.zero;
             playerRigidbody.AddForce(Vector3.up * m_jumpForce * 4, ForceMode.Impulse);
@@ -193,10 +193,10 @@ public class TempPlayer : MonoBehaviour
         m_jumpInput = false;
     }
 
-    private void DirectUpdate()
+    private void DirectUpdate()                                                                 // Move
     {
 
-        Vector3 dist = playerInput.move_hori * right_ * Time.deltaTime * m_moveSpeed;
+        Vector3 dist = playerInput.move_hori * right_ * Time.deltaTime * m_moveSpeed;       // Translate Player According to Inputs
         Vector3 dist2 = playerInput.move_vert * forward_ * Time.deltaTime * m_moveSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -228,7 +228,7 @@ public class TempPlayer : MonoBehaviour
         JumpingAndLanding();
     }
 
-    private void JumpingAndLanding()
+    private void JumpingAndLanding()                                                    // Jump Method
     {
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
@@ -266,7 +266,7 @@ public class TempPlayer : MonoBehaviour
                 playerRigidbody.MovePosition(new Vector3(7, playerRigidbody.position.y, playerRigidbody.position.z));   // x to zero
                 forward_ = Vector3.zero;                // change key
                 right_ = new Vector3(0f, 0f, 1f);
-                for (int i =0; i < transParents.Length; i++)
+                for (int i =0; i < transParents.Length; i++)                        // Find objects that need change, then change
                 {
                     transParents[i].SetTrue();
                 }
@@ -322,12 +322,12 @@ public class TempPlayer : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);              // Wait for 0.7 sec total
 
-        transform.localScale = new Vector3(1, 1, 1);        // No more fix...
+        transform.localScale = new Vector3(1, 1, 1);
         playerRigidbody.useGravity = true;
         allowMove = true;
     }
 
-    void Dead()
+    void Dead()                                             // When 'Kill' tagged object hits player... Die and Restart
     {
         Debug.Log("Die!");
         if (SceneManager.GetActiveScene().name == "Stage1")

@@ -10,7 +10,7 @@ public class TransParent2 : MonoBehaviour
     {
         collider = GetComponents<BoxCollider>();
     }
-    public void SetTrue()
+    public void SetTrue()                                       // Activate or Deactivate
     {
         for (int i = 0; i < collider.Length; i++)
         {

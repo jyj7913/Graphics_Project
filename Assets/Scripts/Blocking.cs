@@ -14,13 +14,13 @@ public class Blocking : MonoBehaviour
         collider.size = new Vector3(collider.size.x * 30, collider.size.y, collider.size.z);
     }
 
-    public void LongCollider()
+    public void LongCollider()                                                                  // If 2D, player's body can step on or touch the objects
     {
         originalLength = collider.size.x;
         collider.size = new Vector3(collider.size.x * 30, collider.size.y, collider.size.z);
     }
 
-    public void ShortCollider()
+    public void ShortCollider()                                                                 // If 3D, objects exist as they are looked.
     {
 
         collider.size = new Vector3(originalLength, collider.size.y, collider.size.z);

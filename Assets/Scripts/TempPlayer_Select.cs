@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TempPlayer_Select : MonoBehaviour
+public class TempPlayer_Select : MonoBehaviour                                              // Similar with TempPlayer.cs
 {
     private float m_moveSpeed = 5;
     private float m_jumpForce = 7;
@@ -94,7 +94,7 @@ public class TempPlayer_Select : MonoBehaviour
         if (m_collisions.Count == 0) { m_isGrounded = false; }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)                         // Collide behind the door, go to the stages. Set LastPosition in the case player clears the stage or returns from the stage.
     {
         if(other.tag == "SampleStage")
         {

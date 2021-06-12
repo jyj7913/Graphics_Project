@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pendulum : MonoBehaviour
+public class Pendulum : MonoBehaviour                                               // Script for Pendulum in Stage 2
 {
     Quaternion start, end;
 
