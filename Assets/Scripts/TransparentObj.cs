@@ -5,7 +5,7 @@ using UnityEngine;
 public class TransparentObj : MonoBehaviour
 {
     // Start is called before the first frame update
-    public void SetTrue()
+    public void SetTrue()                                   // To make Objects invisible
     {
         transform.localScale = new Vector3(1, 1, 1);
     }
