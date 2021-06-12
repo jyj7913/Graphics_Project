@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        PlayerPrefs.SetInt("Stage", 0);
     }
     public void Stage1Clear()
     {
