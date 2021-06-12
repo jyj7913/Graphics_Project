@@ -10,31 +10,29 @@ public class MoveStairs : MonoBehaviour
     public CinemachineVirtualCamera player2d_cam;
     private Vector3 initial;
 
-    // Start is called before the first frame update
     void Start()
     {
-        if (player2d_cam.Priority == 10)
+        if (player2d_cam.Priority == 10)    // 2D camera의 priority를 통해 2D 모드인지 아닌지 판단
             is2D = true;
         else is2D = false;
-        initial = transform.position;
+        initial = transform.position;   // 초기 계단의 위치값 저장
     }
 
-    // Update is called once per frame
     void Update()
     {
         ViewChange();
         if (is2D) {
-            transform.position = new Vector3(7, initial.y, initial.z);
+            transform.position = new Vector3(7, initial.y, initial.z);  // 2D 모드일 경우 계단의 x 위치를 플레이어의 x 위치와 동일하게 설정 
         }
         else
         {
-            transform.position = initial;
+            transform.position = initial;   // 3D 모드일 경우 초기 위치값으로 되돌림
         }
     }
 
     public void ViewChange()
     {
-        if (Input.GetButtonDown("ChangeView"))
+        if (Input.GetButtonDown("ChangeView"))  // 'Q' 키를 누를 경우
         {
             is2D = !is2D;
 

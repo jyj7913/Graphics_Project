@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour
 {
 
-    bool isPickUp;
+    bool isPickUp;  // pick up 가능한 상태인지
     private Behaviour halo;
     private Inventory inven;
-    // Start is called before the first frame update
+
     void Start()
     {
         halo = (Behaviour)GetComponent("Halo");
@@ -17,13 +17,12 @@ public class Item : MonoBehaviour
         inven = FindObjectOfType<Inventory>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isPickUp && Input.GetKeyDown(KeyCode.E)) PickUp();
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerEnter(Collider col)   // 열쇠에 Capsule collider 설정하고 여기에 플레이어가 부딪힐 경우 halo enable, pick up 가능한 상태로 설정
     {
         if (col.tag.Equals("Player"))
         {
@@ -32,7 +31,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider col)
+    void OnTriggerExit(Collider col)    // collider에서 벗어날 경우 halo disable, pick up 불가능한 상태로 설정
     {
         if (col.tag.Equals("Player"))
         {
@@ -44,7 +43,7 @@ public class Item : MonoBehaviour
 
     void PickUp()
     {
-        Destroy(gameObject);
+        Destroy(gameObject);    // 열쇠를 pick up 할 경우 열쇠를 화면에서 destroy
 
         inven.ItemGet();
     }
